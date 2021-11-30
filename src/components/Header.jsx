@@ -1,28 +1,28 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
   const categories = useSelector((state) => state.categories)
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="#">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <a className="navbar-brand" href="/">
             Logo
           </a>
           <button
-            class="btn btn-sm btn-outline-success my-2 my-sm-0"
+            className="btn btn-sm btn-outline-success my-2 my-sm-0"
             type="button"
           >
             Войти
           </button>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light ">
-        <div class="container">
+      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light ">
+        <div className="container">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -30,18 +30,18 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Переключатель навигации"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav m-auto">
-              <li class="nav-item">
-                <span class="nav-link" type="button">
+          <div className="collapse navbar-collapse " id="navbarNav">
+            <ul className="navbar-nav m-auto">
+              <li className="nav-item">
+                <span className="nav-link" type="button">
                   Все питомцы
                 </span>
               </li>
               {categories.map((category) => (
-                <li class="nav-item">
-                  <span class="nav-link" type="button">
+                <li className="nav-item" key={category._id}>
+                  <span className="nav-link" type="button">
                     {category.name}
                   </span>
                 </li>
