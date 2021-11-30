@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 const Header = () => {
-  const categories = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories.categories)
 
   return (
     <div>

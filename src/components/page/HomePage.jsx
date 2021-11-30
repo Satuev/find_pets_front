@@ -2,10 +2,9 @@ import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import {
   fetchCategories,
-  fetchPets,
-  fetchUsers,
-} from "../../redux/features/data_base"
+ } from "../../redux/features/categoriesReducer"
 import Header from "../Header"
+import { fetchPets } from '../../redux/features/petsReducer';
 
 const HomePage = () => {
   const dispatch = useDispatch()
@@ -13,9 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchCategories())
   })
-  useEffect(() => {
-    dispatch(fetchUsers())
-  })
+
   useEffect(() => {
     dispatch(fetchPets())
   })
