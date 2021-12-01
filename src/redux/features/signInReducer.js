@@ -1,4 +1,5 @@
 const initialState = {
+  userDate: {},
   signingIn: false,
   error: null,
   token: localStorage.getItem("token")
@@ -14,7 +15,7 @@ export const signInReducer = (state = initialState, action) => {
       };
     case "signInReducer/signIn/fulfilled":
       return{
-        ...state, error: null, signingIn: false, token: action.payload
+        ...state, error: null, signingIn: false
       }
     case "signInReducer/signIn/rejected":
       return {
@@ -24,6 +25,10 @@ export const signInReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const uploadUserDate = () => {
+
+}
 
 export const auth = (userDate) => {
   return (dispatch) => {
@@ -48,3 +53,9 @@ export const auth = (userDate) => {
         })
   };
 };
+
+export const exitInAccount = () => {
+  return(dispatch) => {
+    localStorage.removeItem("token")
+  }
+}

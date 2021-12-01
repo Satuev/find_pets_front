@@ -1,81 +1,72 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {auth} from "../../redux/features/signInReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {auth, uploadUserDate} from "../../redux/features/signInReducer";
+import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
   const [personalData, setPersonalData] = useState({});
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    const error = useSelector(state => state.signIn.error)
+  const error = useSelector((state) => state.signIn.error);
 
-    const handlePersonalData = {
-        login: (login) => {
-            setPersonalData({...personalData, login})
-        },
-        password: (password) => {
-            setPersonalData({...personalData, password})
-        }
-    }
+  const handlePersonalData = {
+    login: (login) => {
+      setPersonalData({ ...personalData, login });
+    },
+    password: (password) => {
+      setPersonalData({ ...personalData, password });
+    },
+  };
 
-  const handleSabmit = (personalDate) => {
-      dispatch(auth(personalData))
-  }
+  const handleSabmit = () => {
+    dispatch(auth(personalData));
+    {!error && dispatch(uploadUserDate())}
+  };
 
   return (
-    <form>
-      <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address
-        </label>
-        <input
-            onChange={(e)=>{
-                handlePersonalData.login(e.target.value)
-            }}
-          type="email"
-            value={personalData.login}
-          className="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-
+    <div>
+      <div className="container">
+        <div className="registar shadow p-5 rounded-3 mt-5 w-50 m-auto">
+          <form className="row g-3">
+            <div className="col- 12 md-6">
+              <label htmlFor="inputLogin" className="form-label">
+                Логин
+              </label>
+              <input
+                  onChange={(e)=> handlePersonalData.login(e.target.value)}
+                  type="text"
+                  className="form-control"
+                  id="inputLogin" />
+            </div>
+            <div className="col-12 md-6">
+              <label htmlFor="inputPassword" className="form-label">
+                Пароль
+              </label>
+              <input
+                  onChange={(e)=> handlePersonalData.password(e.target.value)}
+                type="password"
+                className="form-control"
+                id="inputPassword"
+              />
+            </div>
+            <div className="col-12">
+              <NavLink to="/registry">Создать аккаунт</NavLink>
+            </div>
+            {error}
+            <div className="col-12">
+              <NavLink
+                  to="/"
+                  onClick={handleSabmit}
+                  type="button"
+                  className="btn btn-primary">
+                Войти
+              </NavLink>
+            </div>
+          </form>
+        </div>
       </div>
-      <div className="mb-3">
-        <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
-        </label>
-        <input
-            onChange={(e)=>{
-                handlePersonalData.password(e.target.value)
-            }}
-            value={personalData.password}
-          type="password"
-          className="form-control"
-          id="exampleInputPassword1"
-        />
-          <div id="emailHelp" className="form-text">
-              {error}
-          </div>
-      </div>
-      <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
-        />
-        <label className="form-check-label" htmlFor="exampleCheck1">
-          Check me out
-        </label>
-      </div>
-      <button
-          onClick={()=>{
-              handleSabmit(personalData)
-          }}
-          type="submit"
-          className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    </div>
   );
 };
 
