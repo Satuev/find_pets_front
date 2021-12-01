@@ -1,7 +1,40 @@
-import React from 'react'
-import './style.css'
+import "./style.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../redux/features/signUpReducer";
 
 const SignUp = () => {
+  const error = useSelector((state) => state.signUp.error);
+
+  const [newUser, setNewUser] = useState({ pets: [] });
+
+  const dispatch = useDispatch();
+
+  const handleNewUser = {
+    login: (login) => {
+      setNewUser({ ...newUser, login });
+    },
+    password: (password) => {
+      setNewUser({ ...newUser, password });
+    },
+    firstName: (firstName) => {
+      setNewUser({ ...newUser, firstName });
+    },
+    lastName: (lastName) => {
+      setNewUser({ ...newUser, lastName });
+    },
+    mail: (mail) => {
+      setNewUser({ ...newUser, mail });
+    },
+    phone: (phone) => {
+      setNewUser({ ...newUser, phone });
+      console.log(newUser)
+    },
+  };
+
+  const handleSabmit = () => {
+    dispatch(createUser(newUser));
+  };
   return (
     <div className="container">
       <div className="registar shadow p-5 rounded-3 mt-5 w-50 m-auto">
@@ -9,19 +42,20 @@ const SignUp = () => {
           <h3 className="col-12 text-center mb-3">Регистарция</h3>
 
           <div className="col-md-6">
-            <label htmlFor="inputName4" className="form-label">
+            <label htmlFor="inputName" className="form-label">
               Имя
             </label>
-            <input type="text" className="form-control" id="inputName4" />
+            <input type="text" className="form-control" id="inputName" onChange={(e)=> handleNewUser.firstName(e.target.value)} />
           </div>
           <div className="col-md-6">
-            <label htmlFor="inputLastName4" className="form-label">
+            <label htmlFor="inputLastName" className="form-label">
               Фамилия
             </label>
             <input
-              type="password"
+              type="text"
               className="form-control"
-              id="inputLastName4"
+              id="inputLastName"
+                onChange={(e)=> handleNewUser.lastName(e.target.value)}
             />
           </div>
           <div className="col-12">
@@ -29,6 +63,7 @@ const SignUp = () => {
               Email
             </label>
             <input
+                onChange={(e)=> handleNewUser.mail(e.target.value)}
               type="email"
               className="form-control"
               id="inputAddress"
@@ -37,19 +72,20 @@ const SignUp = () => {
           </div>
 
           <div className="col-md-6">
-            <label htmlFor="inputLogin4" className="form-label">
+            <label htmlFor="inputLogin" className="form-label">
               Логин
             </label>
-            <input type="text" className="form-control" id="inputLogin4" />
+            <input type="text"  onChange={(e)=> handleNewUser.login(e.target.value)} className="form-control" id="inputLogin" />
           </div>
           <div className="col-md-6">
-            <label htmlFor="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword" className="form-label">
               Пароль
             </label>
             <input
+                onChange={(e)=> handleNewUser.password(e.target.value)}
               type="password"
               className="form-control"
-              id="inputPassword4"
+              id="inputPassword"
             />
           </div>
           <div className="col-12">
@@ -57,22 +93,27 @@ const SignUp = () => {
               Номер телефона
             </label>
             <input
-              type="email"
+                onChange={(e)=> handleNewUser.phone(e.target.value)}
+              type="text"
               className="form-control"
-              id="inputAddress"
+              id="inputNumber"
               placeholder=""
             />
+            {error}
           </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary">
+            <button
+                onClick={handleSabmit}
+                type="submit"
+                className="btn btn-primary">
               Создать аккаунт
             </button>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

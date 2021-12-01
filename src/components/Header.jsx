@@ -7,6 +7,8 @@ import logo from './logo.png'
 const Header = () => {
   const dispatch = useDispatch()
 
+  const token = useSelector(state => state.signIn.token)
+
   useEffect(() => {
     dispatch(fetchCategories())
   }, [dispatch])
@@ -51,8 +53,10 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <NavLink to="/login" className="btn btn-lg " type="button">
-            <i class="bi bi-person-circle"></i>
+          <NavLink to={!token? "/login":"/profile"} className="btn btn-lg " type="button">
+            {!token? <i className="bi bi-person-circle"></i>:<i className="bi bi-person-check-fill"></i>}
+
+
           </NavLink>
         </div>
       </div>
