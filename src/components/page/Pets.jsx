@@ -16,7 +16,7 @@ const Pets = () => {
       <div className="row justify-content-between">
         {pets.map((pet) => (
           <div
-            className="card col-lg-3 col-md-6 col-sm-12  m-2 border-0 shadow"
+            className="card col-lg-3 col-md-5 col-sm-12  m-2 border-0 shadow"
             key={pet._id}
           >
             <img

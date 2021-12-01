@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const Profile = ({ show }) => {
-  console.log(show)
-
+const Profile = () => {
   return (
     <div
-      className="offcanvas offcanvas-end show"
+      className="offcanvas offcanvas-end"
       tabIndex="-1"
       id="offcanvasRight"
       aria-labelledby="offcanvasRightLabel"
@@ -69,8 +67,8 @@ const Profile = ({ show }) => {
           </div>
         </div>
       </div>
-    </div>)
+    </div>
+  )
+}
 
-};
-
-export default Profile;
+export default Profile

@@ -5,7 +5,6 @@ import HomePage from './page/HomePage'
 import Pets from './page/Pets'
 import SignIn from './page/SignIn'
 import SignUp from './page/SignUp'
-import Profile from './page/Profile';
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/pets" element={<Pets />} />
         <Route path="/pets/category/:id" element={<CategoryPets />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
       </Routes>

@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { fetchCategories } from "../redux/features/categoriesReducer";
-import logo from "./logo.png";
-import Profile from "./page/Profile";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { fetchCategories } from '../redux/features/categoriesReducer'
+import logo from './logo.png'
+import Profile from './page/Profile'
 
 const Header = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
 
-  const dispatch = useDispatch();
-
-  const token = useSelector((state) => state.signIn.token);
+  const token = useSelector((state) => state.signIn.token)
+  const categories = useSelector((state) => state.categories.categories)
 
   useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  const categories = useSelector((state) => state.categories.categories);
+    dispatch(fetchCategories())
+  }, [dispatch])
 
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -56,20 +53,28 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          {token ? (
-            <NavLink to="/login" className="btn btn-lg ">
-              <i className="bi bi-person-circle"></i>
+          {!token ? (
+            <NavLink to="/login" className="btn btn-secondary">
+              <i className="bi bi-person-fill me-2"></i>
+              Войти
             </NavLink>
           ) : (
-            <button onClick={() => setShow(true)}>
-              <i className="bi bi-person-check-fill"></i>
-            </button>
+            <div
+              className="btn btn-success"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <i className="bi bi-person-check-fill me-2"></i>
+              Профиль
+            </div>
           )}
-
+          <Profile />
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
