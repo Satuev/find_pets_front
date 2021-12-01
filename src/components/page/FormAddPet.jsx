@@ -20,13 +20,12 @@ const FormAddPet = () => {
     setDescription(e.target.value);
   };
 
-  const handleChangeAnimal = {
+  const handleChangePet = {
     handleChangeImage: (e) => {
       setFile(e.target.files[0]);
     },
 
-    handleAddAnimal: () => {
-      // console.log({header, description, category, file});
+    handleAddPet: () => {
       dispatch(uploadPets(header, description, category, file));
     },
   };
@@ -35,7 +34,7 @@ const FormAddPet = () => {
     <div>
       <div className="container w-50">
         <div>
-          <h1 className="text-center">Форма для добавления животного</h1>
+          <h1 className="text-center">Форма для добавления питомца</h1>
         </div>
         <div className="row mt-5">
           <div className="col">
@@ -88,7 +87,7 @@ const FormAddPet = () => {
             <input
               accept="image/*"
               type="file"
-              onChange={handleChangeAnimal.handleChangeImage}
+              onChange={handleChangePet.handleChangeImage}
               name="img"
             />
           </div>
@@ -96,7 +95,7 @@ const FormAddPet = () => {
         <div className="text-end mt-5">
           <button
             className="btn btn-primary"
-            onClick={handleChangeAnimal.handleAddAnimal}
+            onClick={handleChangePet.handleAddPet}
           >
             Добавить
           </button>
