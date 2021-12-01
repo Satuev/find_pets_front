@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { fetchCategories } from '../redux/features/categoriesReducer'
-import logo from './logo.png'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchCategories } from "../redux/features/categoriesReducer";
+import logo from "./logo.png";
+import Profile from "./page/Profile";
 
 const Header = () => {
-  const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.signIn.token);
 
   useEffect(() => {
-    dispatch(fetchCategories())
-  }, [dispatch])
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-  const categories = useSelector((state) => state.categories.categories)
+  const categories = useSelector((state) => state.categories.categories);
 
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -51,13 +56,20 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <NavLink to="/login" className="btn btn-lg " type="button">
-            <i class="bi bi-person-circle"></i>
-          </NavLink>
+          {token ? (
+            <NavLink to="/login" className="btn btn-lg ">
+              <i className="bi bi-person-circle"></i>
+            </NavLink>
+          ) : (
+            <button onClick={() => setShow(true)}>
+              <i className="bi bi-person-check-fill"></i>
+            </button>
+          )}
+
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
