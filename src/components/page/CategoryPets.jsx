@@ -10,7 +10,7 @@ const CategoryPets = () => {
 
   useEffect(() => {
     dispatch(fetchPets())
-  }, [])
+  }, [dispatch])
 
   const { id } = useParams()
 
