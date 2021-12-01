@@ -15,24 +15,22 @@ export const signInReducer = (state = initialState, action) => {
       };
     case "signInReducer/signIn/fulfilled":
       return{
-        ...state, error: null, signingIn: false
+        ...state, token: action.payload, error: null, signingIn: false,
       }
     case "signInReducer/signIn/rejected":
       return {
         ...state, signingIn: false, error: action.error
       }
+    case "signInReducer/userDate/fulfilled":
+      return {
+        ...state, error: null, signingIn: false, userDate: action.payload
+      }
     default:
       return state;
   }
 };
-
-export const uploadUserDate = () => {
-
-}
-
 export const auth = (userDate) => {
   return (dispatch) => {
-    console.log(userDate)
     dispatch({ type: "signInReducer/signIn/pending"});
     fetch("http://localhost:6557/users/login", {
       method: "POST",
@@ -53,6 +51,27 @@ export const auth = (userDate) => {
         })
   };
 };
+
+export const uploadUserDate = () => {
+  return (dispatch) => {
+    dispatch({ type: "signInReducer/signIn/pending"});
+    fetch("http://localhost:6557/users/profile", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+        .then((res) => res.json())
+        .then((data)=>{
+          if(data.error){
+            dispatch({type: "signInReducer/signIn/rejected"})
+          }else {
+            dispatch({type: "signInReducer/userDate/fulfilled", payload: data})
+          }
+        })
+  }
+}
 
 export const exitInAccount = () => {
   return(dispatch) => {

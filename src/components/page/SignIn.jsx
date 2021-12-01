@@ -8,6 +8,8 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
 
+  const signingIn = useSelector(state => state.signIn.signingIn)
+
   const error = useSelector((state) => state.signIn.error);
 
   const handlePersonalData = {
@@ -21,7 +23,6 @@ const SignIn = () => {
 
   const handleSabmit = () => {
     dispatch(auth(personalData));
-    {!error && dispatch(uploadUserDate())}
   };
 
   return (

@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import slide1 from '../pets1.jpg'
+import {uploadUserDate} from "../../redux/features/signInReducer";
+import {useDispatch} from "react-redux";
 
 const HomePage = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      dispatch(uploadUserDate())
+    }, 2000)
+  }, [dispatch])
+
   return (
     <div>
       <div
