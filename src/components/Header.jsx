@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { fetchPets } from '../redux/features/petsReducer'
+import { fetchCategories } from '../redux/features/categoriesReducer'
 import logo from './logo.png'
 
 const Header = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchPets())
-  })
+    dispatch(fetchCategories())
+  }, [])
 
   const categories = useSelector((state) => state.categories.categories)
 
@@ -42,7 +42,7 @@ const Header = () => {
             {categories.map((category) => (
               <li className="nav-item" key={category._id}>
                 <NavLink
-                  to={`/${category.name}`}
+                  to={`/pets/category/${category._id}`}
                   className="nav-link"
                   type="button"
                 >

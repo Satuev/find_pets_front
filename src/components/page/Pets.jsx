@@ -1,7 +1,14 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPets } from '../../redux/features/petsReducer'
 
 const Pets = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPets())
+  }, [])
+
   const pets = useSelector((state) => state.pets.pets)
 
   return (
