@@ -5,6 +5,7 @@ import HomePage from './page/HomePage'
 import Pets from './page/Pets'
 import SignIn from './page/SignIn'
 import SignUp from './page/SignUp'
+import {useSelector} from "react-redux";
 
 function App() {
   return (
