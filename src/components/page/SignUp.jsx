@@ -3,7 +3,7 @@ import "./style.css";
 
 const SignUp = () => {
   return (
-    <div className='container'>
+   <div className='container'>
     <div className="registar shadow p-5 rounded-3 mt-5 w-50 m-auto">
       <form className="row g-3">
         <h3 className="col-12 text-center mb-3">Регистарция</h3>
