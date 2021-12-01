@@ -6,10 +6,14 @@ const Pets = () => {
 
   return (
     <div className="container">
-      <div className="row justify-content-between mt-5">
+      <div className="row justify-content-between">
         {pets.map((pet) => (
           <div className="card col-3 m-2" key={pet._id}>
-            <img src={pet.img} className="card-img-top" alt="..." />
+            <img
+              src={`http://localhost:6557/${pet.img}`}
+              className="card-img-top"
+              alt="..."
+            />
             <div className="card-body">
               <h5 className="card-title">{pet.header}</h5>
               <p className="card-text">{pet.description}</p>

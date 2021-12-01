@@ -14,11 +14,11 @@ const Header = () => {
   const categories = useSelector((state) => state.categories.categories)
 
   return (
-    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <a className="navbar-brand text-center" href="/">
+        <a className="navbar-brand text-center p-0 m-0" href="/">
           <img className="logo w-25" src={logo} alt="logo" />
-          <h4>Новый дом</h4>
+          <h5>В добрые руки</h5>
         </a>
 
         <button
@@ -33,7 +33,7 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse " id="navbarNav">
-          <ul className="navbar-nav m-auto">
+          <ul className="navbar-nav m-auto pe-5">
             <li className="nav-item">
               <NavLink to="/pets" className="nav-link" type="button">
                 Все питомцы
@@ -51,12 +51,9 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <button
-            className="btn btn-sm btn-outline-success my-2 my-sm-0"
-            type="button"
-          >
-            Войти
-          </button>
+          <span className="btn btn-lg " type="button">
+            <i class="bi bi-person-circle"></i>
+          </span>
         </div>
       </div>
     </nav>
