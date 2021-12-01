@@ -7,7 +7,7 @@ const Pets = () => {
 
   useEffect(() => {
     dispatch(fetchPets())
-  }, [])
+  }, [dispatch])
 
   const pets = useSelector((state) => state.pets.pets)
 

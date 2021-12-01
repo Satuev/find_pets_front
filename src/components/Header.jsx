@@ -9,7 +9,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(fetchCategories())
-  }, [])
+  }, [dispatch])
 
   const categories = useSelector((state) => state.categories.categories)
 
@@ -51,9 +51,9 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <span className="btn btn-lg " type="button">
+          <NavLink to="/login" className="btn btn-lg " type="button">
             <i class="bi bi-person-circle"></i>
-          </span>
+          </NavLink>
         </div>
       </div>
     </nav>
