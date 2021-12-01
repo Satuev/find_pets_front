@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { fetchCategories } from '../../redux/features/categoriesReducer'
+import React from 'react'
 import slide1 from '../pets1.jpg'
 
 const HomePage = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchCategories())
-  })
-
   return (
     <div>
       <div
