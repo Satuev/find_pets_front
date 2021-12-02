@@ -1,6 +1,7 @@
 const initialState = {
   signingUp: false,
   error: null,
+  isFulfilled: false
 }
 
 
@@ -12,7 +13,11 @@ export const signUpReducer = (state = initialState, action) => {
       }
       case "signUpReducer/signup/fulfilled":
       return {
-        ...state, signingUp: true, error: false
+        ...state, signingUp: false, error: false, isFulfilled: false
+      }
+    case "signUpReducer/isFulfilled/fulfilled":
+      return {
+        ...state, isFulfilled: true
       }
       case "signUpReducer/signup/rejected":
       return {
@@ -38,6 +43,7 @@ export const createUser = (userDate) => {
           if (data.error){
             dispatch({type: "signUpReducer/signup/rejected", error: data.error} )
           }else {
+            dispatch({type: "signUpReducer/isFulfilled/fulfilled"})
             dispatch({type: "signUpReducer/signup/fulfilled", payload: data})
           }
         })
