@@ -1,17 +1,9 @@
-import React, {useEffect} from 'react'
-import slide1 from '../pets1.jpg'
-import {uploadUserDate} from "../../redux/features/signInReducer";
-import {useDispatch} from "react-redux";
+import React from 'react'
+import slide1 from '../pets11.jpg'
+import slide2 from '../pets22.jpg'
+import slide3 from '../pets33.jpg'
 
 const HomePage = () => {
-
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      dispatch(uploadUserDate())
-    }, 2000)
-  }, [dispatch])
 
   return (
     <div>
@@ -50,13 +42,13 @@ const HomePage = () => {
             </div>
           </div>
           <div className="carousel-item" data-bs-interval="2000">
-            <img src={slide1} className="d-block w-100" alt="..." />
+            <img src={slide2} className="d-block w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Метка второго слайда</h5>
             </div>
           </div>
-          <div className="carousel-item">
-            <img src={slide1} className="d-block w-100" alt="..." />
+          <div className="carousel-item ">
+            <img src={slide3} className="d-block w-100 " alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Метка третьего слайда</h5>
             </div>

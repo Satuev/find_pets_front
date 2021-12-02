@@ -20,10 +20,13 @@ const CategoryPets = () => {
         <div className="row justify-content-between">
           {pets.map((pet) =>
             pet.category === id ? (
-              <div className="card col-3 m-2" key={pet._id}>
+              <div
+                className="card col-lg-3 col-md-5 col-sm-12  m-2 border-0 shadow"
+                key={pet._id}
+              >
                 <img
                   src={`http://localhost:6557/${pet.img}`}
-                  className="card-img-top"
+                  className="card-img-top mt-1 rounded  shadow"
                   alt="..."
                 />
                 <div className="card-body">

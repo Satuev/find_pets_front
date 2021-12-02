@@ -2,7 +2,7 @@ const initialState = {
   userDate: {},
   signingIn: false,
   error: null,
-  token: localStorage.getItem("token")
+  token: null
 };
 
 export const signInReducer = (state = initialState, action) => {
@@ -25,6 +25,11 @@ export const signInReducer = (state = initialState, action) => {
       return {
         ...state, error: null, signingIn: false, userDate: action.payload
       }
+    case "singInReduser/singOut/fulfilled":{
+      return {
+        ...state, token: null, error: null, signingIn: false
+      }
+    }
     default:
       return state;
   }
@@ -54,7 +59,6 @@ export const auth = (userDate) => {
 
 export const uploadUserDate = () => {
   return (dispatch) => {
-    dispatch({ type: "signInReducer/signIn/pending"});
     fetch("http://localhost:6557/users/profile", {
       method: "POST",
       headers: {
@@ -66,7 +70,7 @@ export const uploadUserDate = () => {
         .then((data)=>{
           if(data.error){
             dispatch({type: "signInReducer/signIn/rejected"})
-          }else {
+          }else{
             dispatch({type: "signInReducer/userDate/fulfilled", payload: data})
           }
         })
@@ -76,5 +80,6 @@ export const uploadUserDate = () => {
 export const exitInAccount = () => {
   return(dispatch) => {
     localStorage.removeItem("token")
+    dispatch({type: "singInReduser/singOut/fulfilled"})
   }
 }
