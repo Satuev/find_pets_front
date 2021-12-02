@@ -2,13 +2,22 @@ import "./style.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../redux/features/signUpReducer";
+import {useNavigate} from "react-router-dom";
 
 const SignUp = () => {
+
+  const isFulfilled = useSelector((state) => state.signUp.isFulfilled);
+
+
   const error = useSelector((state) => state.signUp.error);
 
-  const [newUser, setNewUser] = useState({ pets: [] });
+  const [newUser, setNewUser] = useState({ pets: [], login: "", password: "",  firstName: "", lastName:"", mail:"", phone:""});
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  {isFulfilled && navigate('/login')}
 
   const handleNewUser = {
     login: (login) => {
@@ -19,6 +28,7 @@ const SignUp = () => {
     },
     firstName: (firstName) => {
       setNewUser({ ...newUser, firstName });
+      console.log(newUser)
     },
     lastName: (lastName) => {
       setNewUser({ ...newUser, lastName });
@@ -28,12 +38,13 @@ const SignUp = () => {
     },
     phone: (phone) => {
       setNewUser({ ...newUser, phone });
-      console.log(newUser)
     },
   };
 
   const handleSabmit = () => {
     dispatch(createUser(newUser));
+    setNewUser({ pets: [], login: "", password: "",  firstName: "", lastName:"", mail:"", phone:""})
+    console.log(newUser)
   };
   return (
     <div className="container">
@@ -45,7 +56,11 @@ const SignUp = () => {
             <label htmlFor="inputName" className="form-label">
               Имя
             </label>
-            <input type="text" className="form-control" id="inputName" onChange={(e)=> handleNewUser.firstName(e.target.value)} />
+            <input
+                value={newUser.firstName}
+                type="text"
+                className="form-control"
+                id="inputName" onChange={(e)=> handleNewUser.firstName(e.target.value)} />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputLastName" className="form-label">
@@ -55,6 +70,7 @@ const SignUp = () => {
               type="text"
               className="form-control"
               id="inputLastName"
+              value={newUser.lastName}
                 onChange={(e)=> handleNewUser.lastName(e.target.value)}
             />
           </div>
@@ -63,6 +79,7 @@ const SignUp = () => {
               Email
             </label>
             <input
+                value={newUser.mail}
                 onChange={(e)=> handleNewUser.mail(e.target.value)}
               type="email"
               className="form-control"
@@ -75,13 +92,18 @@ const SignUp = () => {
             <label htmlFor="inputLogin" className="form-label">
               Логин
             </label>
-            <input type="text"  onChange={(e)=> handleNewUser.login(e.target.value)} className="form-control" id="inputLogin" />
+            <input
+                value={newUser.login}
+                type="text"
+                onChange={(e)=> handleNewUser.login(e.target.value)}
+                className="form-control" id="inputLogin" />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputPassword" className="form-label">
               Пароль
             </label>
             <input
+                value={newUser.password}
                 onChange={(e)=> handleNewUser.password(e.target.value)}
               type="password"
               className="form-control"
@@ -93,22 +115,24 @@ const SignUp = () => {
               Номер телефона
             </label>
             <input
+                value={newUser.phone}
                 onChange={(e)=> handleNewUser.phone(e.target.value)}
               type="text"
               className="form-control"
               id="inputNumber"
               placeholder=""
             />
+          </div>
+          <div style={{color: "red"}}>
             {error}
           </div>
-
           <div className="col-12">
-            <button
+            <span
                 onClick={handleSabmit}
                 type="submit"
                 className="btn btn-primary">
               Создать аккаунт
-            </button>
+            </span>
           </div>
         </form>
       </div>

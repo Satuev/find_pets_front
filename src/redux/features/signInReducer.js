@@ -2,7 +2,7 @@ const initialState = {
   userDate: {},
   signingIn: false,
   error: null,
-  token: null
+  token: localStorage.getItem("token")
 };
 
 export const signInReducer = (state = initialState, action) => {

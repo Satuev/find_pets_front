@@ -7,6 +7,8 @@ const SignIn = () => {
 
   const [personalData, setPersonalData] = useState({});
 
+  const isFulfilled = useSelector((state) => state.signUp.isFulfilled);
+
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.signIn.error);
@@ -24,11 +26,12 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
+  {token && navigate('/')}
+
   const handleSabmit = async () => {
     await dispatch(auth(personalData));
   };
 
-  {token && navigate('/')}
   return (
     <div>
       <div className="container">
@@ -57,9 +60,11 @@ const SignIn = () => {
               />
             </div>
             <div className="col-12">
-              <NavLink to="/registry">Создать аккаунт</NavLink>
+              <NavLink to="/registry"><span>Создать аккаунт</span></NavLink>
             </div>
-            {error}
+            <div style={{color: "red"}}>
+              {error}
+            </div>
             <div className="col-12">
               <button
                 onClick={handleSabmit}
