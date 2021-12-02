@@ -1,41 +1,40 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../redux/features/signInReducer";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../../redux/features/signInReducer'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
+  const [personalData, setPersonalData] = useState({})
 
-  const [personalData, setPersonalData] = useState({});
+  // const isFulfilled = useSelector((state) => state.signUp.isFulfilled)
 
-  const isFulfilled = useSelector((state) => state.signUp.isFulfilled);
+  const dispatch = useDispatch()
 
-  const dispatch = useDispatch();
+  const error = useSelector((state) => state.signIn.error)
 
-  const error = useSelector((state) => state.signIn.error);
-
-  const token = useSelector((state) => state.signIn.token);
+  const token = useSelector((state) => state.signIn.token)
 
   const handlePersonalData = {
     login: (login) => {
-      setPersonalData({ ...personalData, login });
+      setPersonalData({ ...personalData, login })
     },
     password: (password) => {
-      setPersonalData({ ...personalData, password });
+      setPersonalData({ ...personalData, password })
     },
-  };
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  {token && navigate('/')}
+  token && navigate('/')
 
-  const handleSabmit = async () => {
-    await dispatch(auth(personalData));
-  };
+  const handleSubmit = async () => {
+    await dispatch(auth(personalData))
+  }
 
   return (
     <div>
       <div className="container">
-        <div className="registar shadow p-5 rounded-3 mt-5 w-50 m-auto">
+        <div className="shadow p-5 rounded-3 mt-5 w-50 m-auto">
           <form className="row g-3">
             <div className="col- 12 md-6">
               <label htmlFor="inputLogin" className="form-label">
@@ -60,14 +59,14 @@ const SignIn = () => {
               />
             </div>
             <div className="col-12">
-              <NavLink to="/registry"><span>Создать аккаунт</span></NavLink>
+              <NavLink to="/registry">
+                <span>Создать аккаунт</span>
+              </NavLink>
             </div>
-            <div style={{color: "red"}}>
-              {error}
-            </div>
+            <div style={{ color: 'red' }}>{error}</div>
             <div className="col-12">
               <button
-                onClick={handleSabmit}
+                onClick={handleSubmit}
                 type="button"
                 className="btn btn-primary"
               >
@@ -78,8 +77,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
+  )
+}
 
-  );
-};
-
-export default SignIn;
+export default SignIn

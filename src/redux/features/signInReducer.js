@@ -2,84 +2,94 @@ const initialState = {
   userDate: {},
   signingIn: false,
   error: null,
-  token: localStorage.getItem("token")
-};
+  token: localStorage.getItem('token'),
+}
 
 export const signInReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "signInReducer/signIn/pending":
+    case 'signInReducer/signIn/pending':
       return {
         ...state,
         signingIn: true,
         error: null,
-      };
-    case "signInReducer/signIn/fulfilled":
-      return{
-        ...state, token: action.payload, error: null, signingIn: false,
       }
-    case "signInReducer/signIn/rejected":
+    case 'signInReducer/signIn/fulfilled':
       return {
-        ...state, signingIn: false, error: action.error
+        ...state,
+        token: action.payload,
+        error: null,
+        signingIn: false,
       }
-    case "signInReducer/userDate/fulfilled":
+    case 'signInReducer/signIn/rejected':
       return {
-        ...state, error: null, signingIn: false, userDate: action.payload
+        ...state,
+        signingIn: false,
+        error: action.error,
       }
-    case "singInReduser/singOut/fulfilled":{
+    case 'signInReducer/userDate/fulfilled':
       return {
-        ...state, token: null, error: null, signingIn: false
+        ...state,
+        error: null,
+        signingIn: false,
+        userDate: action.payload,
+      }
+    case 'singInReducer/singOut/fulfilled': {
+      return {
+        ...state,
+        token: null,
+        error: null,
+        signingIn: false,
       }
     }
     default:
-      return state;
+      return state
   }
-};
+}
 export const auth = (userDate) => {
   return (dispatch) => {
-    dispatch({ type: "signInReducer/signIn/pending"});
-    fetch("http://localhost:6557/users/login", {
-      method: "POST",
+    dispatch({ type: 'signInReducer/signIn/pending' })
+    fetch('http://localhost:6557/users/login', {
+      method: 'POST',
       body: JSON.stringify(userDate),
       headers: {
-        "Content-type": "application/json"
-      }
+        'Content-type': 'application/json',
+      },
     })
-        .then((res) => res.json())
-        .then((data)=> {
-          if (data.error){
-            dispatch({type: "signInReducer/signIn/rejected", error: data.error})
-          }
-          else{
-            dispatch({type: "signInReducer/signIn/fulfilled", payload: data})
-            localStorage.setItem("token", data)
-          }
-        })
-  };
-};
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          dispatch({ type: 'signInReducer/signIn/rejected', error: data.error })
+        } else {
+          dispatch({ type: 'signInReducer/signIn/fulfilled', payload: data })
+          localStorage.setItem('token', data)
+        }
+      })
+  }
+}
 
 export const uploadUserDate = () => {
   return (dispatch) => {
-    fetch("http://localhost:6557/users/profile", {
-      method: "POST",
+    fetch('http://localhost:6557/users/profile', {
+      method: 'POST',
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
-        .then((res) => res.json())
-        .then((data)=>{
-          if(data.error){
-            dispatch({type: "signInReducer/signIn/rejected"})
-          }else{
-            dispatch({type: "signInReducer/userDate/fulfilled", payload: data})
-          }
-        })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          dispatch({ type: 'signInReducer/signIn/rejected' })
+        } else {
+          dispatch({ type: 'signInReducer/userDate/fulfilled', payload: data })
+        }
+      })
   }
 }
 
 export const exitInAccount = () => {
-  return(dispatch) => {
-    localStorage.removeItem("token")
-    dispatch({type: "singInReduser/singOut/fulfilled"})
+  return (dispatch) => {
+    localStorage.removeItem('token')
+    dispatch({ type: 'singInReducer/singOut/fulfilled' })
   }
 }

@@ -1,20 +1,18 @@
-import React, {useEffect} from 'react'
-import {exitInAccount, uploadUserDate} from "../../redux/features/signInReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect } from 'react'
+import {
+  exitInAccount,
+  uploadUserDate,
+} from '../../redux/features/signInReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 const Profile = () => {
-
   const dispatch = useDispatch()
 
-  const userDate = useSelector(state => state.signIn.userDate)
+  const userDate = useSelector((state) => state.signIn.userDate)
 
-  const token = useSelector((state) => state.signIn.token);
-
-  const navigate = useNavigate();
-
-  useEffect(()=>{
-      dispatch(uploadUserDate())
+  useEffect(() => {
+    dispatch(uploadUserDate())
   }, [dispatch])
 
   const handleExit = () => {
@@ -79,13 +77,18 @@ const Profile = () => {
               </table>
             </div>
             <div className="div d-flex justify-content-between">
-              <button className="btn btn-success btn-sm">
+              <NavLink
+                to="/addPet"
+                className="btn btn-success btn-sm"
+                data-bs-dismiss="offcanvas"
+              >
                 Добавить объявление
-              </button>
+              </NavLink>
               <button
-                  data-bs-dismiss="offcanvas"
-                  onClick={handleExit}
-                  className="btn btn-danger btn-sm">
+                data-bs-dismiss="offcanvas"
+                onClick={handleExit}
+                className="btn btn-danger btn-sm"
+              >
                 Выход
               </button>
             </div>
