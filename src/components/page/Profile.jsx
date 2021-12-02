@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from "react-router-dom";
 
 const Profile = () => {
   return (
@@ -59,9 +60,9 @@ const Profile = () => {
               </table>
             </div>
             <div className="div d-flex justify-content-between">
-              <button className="btn btn-success btn-sm">
+              <NavLink to={"/pets/add"} className="btn btn-success btn-sm">
                 Добавить объявление
-              </button>
+              </NavLink>
               <button className="btn btn-danger btn-sm">Выход</button>
             </div>
           </div>
