@@ -1,3 +1,5 @@
+
+import ContentPets from './page/ContentPets';
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import CategoryPets from "./page/CategoryPets";
@@ -6,8 +8,10 @@ import Pets from "./page/Pets";
 import SignIn from "./page/SignIn";
 import SignUp from "./page/SignUp";
 import FormAddPet from "./page/FormAddPet";
+import ErrorPage from "./page/errorPage";
 
 function App() {
+
   return (
     <>
       <Header />
@@ -18,6 +22,9 @@ function App() {
         <Route path="/pets/add" element={<FormAddPet />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
+        <Route path="/content" element={<ContentPets />} />
+          <Route path="*" element={<ErrorPage />} />
+
       </Routes>
     </>
   );

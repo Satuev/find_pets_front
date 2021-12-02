@@ -4,6 +4,7 @@ import slide2 from '../pets22.jpg'
 import slide3 from '../pets33.jpg'
 
 const HomePage = () => {
+
   return (
     <div>
       <div

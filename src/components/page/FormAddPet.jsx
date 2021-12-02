@@ -20,16 +20,15 @@ const FormAddPet = () => {
     setDescription(e.target.value);
   };
 
-  console.log(file)
-
   const handleChangePet = {
     handleChangeImage: (e) => {
       setFile(e.target.files[0]);
     },
 
+
     handleAddPet: () => {
       dispatch(uploadPets(header, description, category, file));
-      setFile(this.element.reset())
+      // setFile(this.element.reset())
     },
   };
 
@@ -112,7 +111,7 @@ const FormAddPet = () => {
             <img src="" alt=""/>
 
             <div className="text-end mt-5">
-              <button
+              <span
                   disabled={header === null || description === null || category === null || file === null}
                   className="btn btn-primary"
                   onClick={handleChangePet.handleAddPet}
@@ -120,7 +119,7 @@ const FormAddPet = () => {
                   data-bs-target="#exampleModal"
               >
                 Добавить
-              </button>
+              </span>
             </div>
           </div>
           <div>

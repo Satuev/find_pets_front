@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {auth, uploadUserDate} from "../../redux/features/signInReducer";
-import { NavLink } from "react-router-dom";
+import { auth } from "../../redux/features/signInReducer";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+
   const [personalData, setPersonalData] = useState({});
+
+  const isFulfilled = useSelector((state) => state.signUp.isFulfilled);
 
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.signIn.error);
+
+  const token = useSelector((state) => state.signIn.token);
 
   const handlePersonalData = {
     login: (login) => {
@@ -19,9 +24,12 @@ const SignIn = () => {
     },
   };
 
-  const handleSabmit = () => {
-    dispatch(auth(personalData));
-    {!error && dispatch(uploadUserDate())}
+  const navigate = useNavigate();
+
+  {token && navigate('/')}
+
+  const handleSabmit = async () => {
+    await dispatch(auth(personalData));
   };
 
   return (
@@ -34,39 +42,43 @@ const SignIn = () => {
                 Логин
               </label>
               <input
-                  onChange={(e)=> handlePersonalData.login(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  id="inputLogin" />
+                onChange={(e) => handlePersonalData.login(e.target.value)}
+                type="text"
+                className="form-control"
+                id="inputLogin"
+              />
             </div>
             <div className="col-12 md-6">
               <label htmlFor="inputPassword" className="form-label">
                 Пароль
               </label>
               <input
-                  onChange={(e)=> handlePersonalData.password(e.target.value)}
+                onChange={(e) => handlePersonalData.password(e.target.value)}
                 type="password"
                 className="form-control"
                 id="inputPassword"
               />
             </div>
             <div className="col-12">
-              <NavLink to="/registry">Создать аккаунт</NavLink>
+              <NavLink to="/registry"><span>Создать аккаунт</span></NavLink>
             </div>
-            {error}
+            <div style={{color: "red"}}>
+              {error}
+            </div>
             <div className="col-12">
-              <NavLink
-                  to="/"
-                  onClick={handleSabmit}
-                  type="button"
-                  className="btn btn-primary">
+              <button
+                onClick={handleSabmit}
+                type="button"
+                className="btn btn-primary"
+              >
                 Войти
-              </NavLink>
+              </button>
             </div>
           </form>
         </div>
       </div>
     </div>
+
   );
 };
 
