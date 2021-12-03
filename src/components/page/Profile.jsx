@@ -1,17 +1,13 @@
 import React, {useEffect} from 'react'
 import {exitInAccount, uploadUserDate} from "../../redux/features/signInReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Profile = () => {
 
   const dispatch = useDispatch()
 
   const userDate = useSelector(state => state.signIn.userDate)
-
-  const token = useSelector((state) => state.signIn.token);
-
-  const navigate = useNavigate();
 
   useEffect(()=>{
       dispatch(uploadUserDate())
@@ -79,9 +75,9 @@ const Profile = () => {
               </table>
             </div>
             <div className="div d-flex justify-content-between">
-              <button className="btn btn-success btn-sm">
+              <NavLink to={"/pets/add"} className="btn btn-success btn-sm">
                 Добавить объявление
-              </button>
+              </NavLink>
               <button
                   data-bs-dismiss="offcanvas"
                   onClick={handleExit}

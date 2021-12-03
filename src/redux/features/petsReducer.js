@@ -58,7 +58,11 @@ export const uploadPets = (header, description, category, file) => {
 
     fetch("http://localhost:6557/pets/add", {
       method: "POST",
-      body: formData,
+      headers: {
+        // "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      body: formData
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
