@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { Route, Routes } from 'react-router-dom'
-import Header from './Header'
-import CategoryPets from './page/CategoryPets'
-import Footer from './page/Footer'
-import HomePage from './page/HomePage'
-import Pets from './page/Pets'
-import SignIn from './page/SignIn'
-import SignUp from './page/SignUp'
-=======
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import CategoryPets from "./page/CategoryPets";
@@ -16,13 +6,11 @@ import Pets from "./page/Pets";
 import SignIn from "./page/SignIn";
 import SignUp from "./page/SignUp";
 import FormAddPet from "./page/FormAddPet";
-import { useSelector } from "react-redux";
 import ErrorPage from "./page/errorPage";
-import ContentPets from './page/ContentPets';
->>>>>>> f1ec03e3cc878dd38de4b7ed08054c542a0e9f8d
+import ContentPets from './page/HomePage/ContentPets';
+import Footer from './page/Footer';
 
 function App() {
-
   return (
     <>
       <Header />
@@ -31,14 +19,14 @@ function App() {
         <Route path="/pets" element={<Pets />} />
         <Route path="/pets/category/:id" element={<CategoryPets />} />
         <Route path="/pets/add" element={<FormAddPet />} />
+        <Route path="/content" element={<ContentPets />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
-        <Route path="/content" element={<ContentPets />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer/>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
