@@ -1,5 +1,3 @@
-
-import ContentPets from './page/ContentPets';
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import CategoryPets from "./page/CategoryPets";
@@ -8,7 +6,9 @@ import Pets from "./page/Pets";
 import SignIn from "./page/SignIn";
 import SignUp from "./page/SignUp";
 import FormAddPet from "./page/FormAddPet";
+import { useSelector } from "react-redux";
 import ErrorPage from "./page/errorPage";
+import ContentPets from './page/ContentPets';
 
 function App() {
 
@@ -23,8 +23,7 @@ function App() {
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
         <Route path="/content" element={<ContentPets />} />
-          <Route path="*" element={<ErrorPage />} />
-
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
