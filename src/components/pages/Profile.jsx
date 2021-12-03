@@ -6,11 +6,13 @@ import {NavLink} from "react-router-dom";
 const Profile = () => {
   const dispatch = useDispatch()
 
+  const token = useSelector(state => state.signIn.token)
+
   const userDate = useSelector(state => state.signIn.userDate)
 
   useEffect(()=>{
-      dispatch(uploadUserDate())
-  }, [dispatch])
+    dispatch(uploadUserDate())
+  }, [token])
 
   const handleExit = () => {
     dispatch(exitInAccount())

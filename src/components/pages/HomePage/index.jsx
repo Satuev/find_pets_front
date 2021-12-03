@@ -11,7 +11,7 @@ const HomePage = () => {
     <div className="">
       <div
         id="carouselExampleFade"
-        className="carousel carousel-dark slide carousel-fade border-bottom border-1 mb-4"
+        className="carousel carousel-dark slide carousel-fade border-bottom border-1 "
         data-bs-ride="carousel"
       >
         <div className="carousel-inner ">
@@ -51,16 +51,14 @@ const HomePage = () => {
         </button>
       </div>
       <ContentPets />
-      /////
   <div class="container">
     <div class="row g-0">
       <div class="col-md-4">
         <img src={img} class="img-fluid rounded-end align-items-start rounded-pill" alt="..." />
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Герман Гессе. </h5>
-          <p class="card-text">
+      <div class="col-md-8 border border-2 rounded-start rounded-pill">
+        <div class="card-body ">
+          <p class="card-text py-4  fs-6 pe-4">
             Животные более настоящие, чем люди. Они не хотят тебе льстить,
             не хотят производить на тебя какое-то впечатление. Ничего
             показного. Какие они есть, такие и есть, как камни и цветы или
@@ -72,11 +70,10 @@ const HomePage = () => {
   </div>
   <br></br>
   <div class="container">
-    <div class="row justify-content-between">
-      <div class="col-md-8 border border-light">
+    <div class="row g-0  ">
+      <div class="col-md-8 border border-2 rounded-end rounded-pill">
         <div class="card-body">
-          <h5 class="card-title"> </h5>
-          <p class="card-text">
+          <p class="card-text ps-5 py-4 fs-6 ">
             Не бросайте животных , они самые преданные и любят вас
             независимо от того, кто вы и сколько у вас денег.
           </p>
@@ -91,7 +88,6 @@ const HomePage = () => {
         </div>
       </div>
     </div>
-      /////
     </div>
   )
 }
