@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-import { fetchPets } from '../../redux/features/petsReducer'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router"
+import { fetchPets } from "../../redux/features/petsReducer"
 
 const CategoryPets = () => {
   const pets = useSelector((state) => state.pets.pets.reverse())
@@ -32,13 +32,16 @@ const CategoryPets = () => {
                 <div className="card-body">
                   <h5 className="card-title">{pet.header}</h5>
                   <p className="card-text">{pet.description}</p>
-                  <a href={`http://localhost:3000/pet/${pet._id}`} className="btn btn-primary w-100">
-                    Перейти куда-нибудь
+                  <a
+                    href={`http://localhost:3000/pet/${pet._id}`}
+                    className="btn btn-primary w-100"
+                  >
+                    Описание
                   </a>
                 </div>
               </div>
             ) : (
-              ''
+              ""
             )
           )}
         </div>
