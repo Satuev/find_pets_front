@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchContentPets } from '../../../../redux/features/petsReducer'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchContentPets } from "../../../../redux/features/petsReducer"
 import cl from "./contentPets.module.css"
 
 const ContentPets = () => {
@@ -19,7 +19,7 @@ const ContentPets = () => {
             return (
               <div
                 key={pet._id}
-                className={`${cl.card} col-3 m-1 border-0  p-0 text-white`}
+                className={`${cl.cardContent} col-3 m-1 border-0  p-0 text-white`}
               >
                 <img
                   src={`http://localhost:6557/${pet.img}`}
@@ -27,14 +27,12 @@ const ContentPets = () => {
                   alt="..."
                 />
                 <div className="card-img-overlay ">
-                  <h5 className={`${cl.cardTitle} text-center text-bottom fs-2`}>
-                    {pet.header}
-                  </h5>
+                  <h5 className="text-center text-bottom fs-2">{pet.header}</h5>
                 </div>
               </div>
-
             )
           }
+          return null
         })}
       </div>
     </div>

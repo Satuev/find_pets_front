@@ -1,37 +1,37 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { uploadPets } from "../../redux/features/petsReducer";
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { uploadPets } from "../../redux/features/petsReducer"
 
 const FormAddPet = () => {
-  const [header, setHeader] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [category, setCategory] = useState(null);
-  const [file, setFile] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [header, setHeader] = useState(null)
+  const [description, setDescription] = useState(null)
+  const [category, setCategory] = useState(null)
+  const [file, setFile] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
-  const imageBox = document.querySelector(".imgBox");
+  const imageBox = document.querySelector(".imgBox")
 
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.categories)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleChangeHeader = (e) => {
-    setHeader(e.target.value);
-  };
+    setHeader(e.target.value)
+  }
 
   const handleChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
+    setDescription(e.target.value)
+  }
 
   const handleChangeImage = (e) => {
-    setFile(e.target.files[0]);
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
+    setFile(e.target.files[0])
+    const reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
 
     reader.onload = () => {
-      imageBox.src = reader.result;
-    };
-  };
+      imageBox.src = reader.result
+    }
+  }
 
   const handleAddPet = () => {
     if (
@@ -40,20 +40,20 @@ const FormAddPet = () => {
       category === null ||
       file === null
     ) {
-      setErrorMessage("*Пожалуйста заполните все поля");
+      setErrorMessage("*Пожалуйста заполните все поля")
     } else {
-      dispatch(uploadPets(header, description, category, file));
+      dispatch(uploadPets(header, description, category, file))
     }
-  };
+  }
 
   const handleReset = () => {
-    document.getElementById('myform').reset()
+    document.getElementById("myform").reset()
     setHeader(null)
     setDescription("")
     setCategory(null)
     setErrorMessage(null)
     imageBox.src = ""
-  };
+  }
 
   return (
     <div>
@@ -108,8 +108,9 @@ const FormAddPet = () => {
                 >
                   {categories.map((cat) => {
                     if (cat._id === category) {
-                      return cat.name;
+                      return cat.name
                     }
+                    return null
                   })}
                 </button>
                 <ul
@@ -184,7 +185,7 @@ const FormAddPet = () => {
           </div>
         )}
     </div>
-  );
-};
+  )
+}
 
-export default FormAddPet;
+export default FormAddPet
