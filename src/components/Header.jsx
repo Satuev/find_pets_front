@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { fetchCategories } from '../redux/features/categoriesReducer'
 import logo from './logo.png'
-import Profile from './page/Profile'
+import Profile from './pages/Profile'
 
 const Header = () => {
   const dispatch = useDispatch()

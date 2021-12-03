@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
-import CategoryPets from "./page/CategoryPets";
-import HomePage from "./page/HomePage";
-import Pets from "./page/Pets";
-import SignIn from "./page/SignIn";
-import SignUp from "./page/SignUp";
-import FormAddPet from "./page/FormAddPet";
-import ErrorPage from "./page/errorPage";
-import ContentPets from './page/HomePage/ContentPets';
-import Footer from './page/Footer';
+import CategoryPets from "./pages/CategoryPets";
+import HomePage from "./pages/HomePage";
+import Pets from "./pages/Pets";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import FormAddPet from "./pages/FormAddPet";
+import ErrorPage from "./pages/errorPage";
+import ContentPets from './pages/HomePage/ContentPets';
+import Footer from './pages/Footer';
 
 function App() {
   return (
