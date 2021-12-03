@@ -1,40 +1,84 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../redux/features/signInReducer";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+
+  const [personalData, setPersonalData] = useState({});
+
+  const isFulfilled = useSelector((state) => state.signUp.isFulfilled);
+
+  const dispatch = useDispatch();
+
+  const error = useSelector((state) => state.signIn.error);
+
+  const token = useSelector((state) => state.signIn.token);
+
+  const handlePersonalData = {
+    login: (login) => {
+      setPersonalData({ ...personalData, login });
+    },
+    password: (password) => {
+      setPersonalData({ ...personalData, password });
+    },
+  };
+
+  const navigate = useNavigate();
+
+  {token && navigate('/')}
+
+  const handleSabmit = async () => {
+    await dispatch(auth(personalData));
+  };
+
   return (
     <div>
       <div className="container">
         <div className="registar shadow p-5 rounded-3 mt-5 w-50 m-auto">
           <form className="row g-3">
             <div className="col- 12 md-6">
-              <label htmlFor="inputLogin4" className="form-label">
+              <label htmlFor="inputLogin" className="form-label">
                 Логин
               </label>
-              <input type="text" className="form-control" id="inputLogin4" />
+              <input
+                onChange={(e) => handlePersonalData.login(e.target.value)}
+                type="text"
+                className="form-control"
+                id="inputLogin"
+              />
             </div>
             <div className="col-12 md-6">
-              <label htmlFor="inputPassword4" className="form-label">
+              <label htmlFor="inputPassword" className="form-label">
                 Пароль
               </label>
               <input
+                onChange={(e) => handlePersonalData.password(e.target.value)}
                 type="password"
                 className="form-control"
-                id="inputPassword4"
+                id="inputPassword"
               />
             </div>
             <div className="col-12">
-              <NavLink to="/registry">Создать аккаунт</NavLink>
+              <NavLink to="/registry"><span>Создать аккаунт</span></NavLink>
             </div>
-              <div className="col-12">
-                  <button type="submit" className="btn btn-primary">
-                      Войти
-                  </button>
-              </div>
+            <div style={{color: "red"}}>
+              {error}
+            </div>
+            <div className="col-12">
+              <button
+                onClick={handleSabmit}
+                type="button"
+                className="btn btn-primary"
+              >
+                Войти
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
+
   );
 };
 
