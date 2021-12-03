@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Header from './Header'
 import CategoryPets from './page/CategoryPets'
+import Footer from './page/Footer'
 import HomePage from './page/HomePage'
 import Pets from './page/Pets'
 import SignIn from './page/SignIn'
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
       </Routes>
+      <Footer/>
     </>
   )
 }
