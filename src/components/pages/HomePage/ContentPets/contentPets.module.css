@@ -1,0 +1,23 @@
+.card {
+  transition: 0.3s ease-in-out;
+  border-radius: 5px;
+}
+.card:hover {
+  box-shadow: 4px 4px 21px 4px rgba(87, 90, 92, 0.25);
+  transform: scale(1.02);
+}
+.cardImg {
+  border-radius: 5px;
+  display: block;
+  width: 100%;
+}
+/* .container {
+>>>>>>> 76f68059477092b0a87f4e96e099aadc7ad5c5f8:src/components/pages/HomePage/ContentPets/contentPets.module.css
+  margin-top: 30px;
+} */
+
+.cardTitle {
+  position: absolute;
+  left: 40%;
+  bottom: 30px;
+}

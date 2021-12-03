@@ -1,11 +1,16 @@
-import { Route, Routes } from 'react-router-dom'
-import Header from './Header'
-import CategoryPets from './page/CategoryPets'
-import HomePage from './page/HomePage'
-import Pets from './page/Pets'
-import SignIn from './page/SignIn'
-import SignUp from './page/SignUp'
-import PetInfo from './page/PetInfo';
+
+import { Route, Routes } from "react-router-dom";
+import Header from "./Header";
+import CategoryPets from "./pages/CategoryPets";
+import HomePage from "./pages/HomePage";
+import Pets from "./pages/Pets";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import FormAddPet from "./pages/FormAddPet";
+import ErrorPage from "./pages/errorPage";
+import ContentPets from './pages/HomePage/ContentPets';
+import Footer from './pages/Footer';
+import PetInfo from './pages/PetInfo';
 
 function App() {
   return (
@@ -15,10 +20,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/pets" element={<Pets />} />
         <Route path="/pets/category/:id" element={<CategoryPets />} />
+        <Route path="/pets/add" element={<FormAddPet />} />
+        <Route path="/content" element={<ContentPets />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
         <Route path="/pet/:id" element={<PetInfo />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer/>
     </>
   )
 }

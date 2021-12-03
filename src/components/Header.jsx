@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { fetchCategories } from '../redux/features/categoriesReducer'
 import logo from './logo.png'
-import Profile from './page/Profile'
+import Profile from './pages/Profile'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const Header = () => {
         <div className="collapse navbar-collapse " id="navbarNav">
           <ul className="navbar-nav m-auto pe-5">
             <li className="nav-item">
-              <NavLink to="/pets" className="nav-link" type="button">
+              <NavLink  to="/pets" className="nav-link" type="button">
                 Все питомцы
               </NavLink>
             </li>
@@ -53,7 +53,7 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          {token ? (
+          {!token ? (
             <NavLink to="/login" className="btn btn-secondary">
               <i className="bi bi-person-fill me-2"></i>
               Войти

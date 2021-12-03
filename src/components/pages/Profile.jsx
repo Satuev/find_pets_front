@@ -1,6 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {exitInAccount, uploadUserDate} from "../../redux/features/signInReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {NavLink} from "react-router-dom";
 
 const Profile = () => {
+  const dispatch = useDispatch()
+
+  const token = useSelector(state => state.signIn.token)
+
+  const userDate = useSelector(state => state.signIn.userDate)
+
+  useEffect(()=>{
+    dispatch(uploadUserDate())
+  }, [token])
+
+  const handleExit = () => {
+    dispatch(exitInAccount())
+  }
+
   return (
     <div
       className="offcanvas offcanvas-end"
@@ -41,28 +58,38 @@ const Profile = () => {
                 <tbody>
                   <tr>
                     <th scope="row">Фамилия: </th>
-                    <td>Атамазов</td>
+                    <td>{userDate.lastName}</td>
                   </tr>
                   <tr>
                     <th scope="row">Имя:</th>
-                    <td>Насырбек</td>
+                    <td>{userDate.firstName}</td>
                   </tr>
                   <tr>
                     <th scope="row">Телефон:</th>
-                    <td colSpan="2">89389993827</td>
+                    <td colSpan="2">{userDate.phone}</td>
                   </tr>
                   <tr>
                     <th scope="row">Почта:</th>
-                    <td colSpan="2">intocode@mail.ru</td>
+                    <td colSpan="2">{userDate.mail}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div className="div d-flex justify-content-between">
-              <button className="btn btn-success btn-sm">
+              <NavLink
+                to="/pets/add"
+                className="btn btn-success btn-sm"
+                data-bs-dismiss="offcanvas"
+              >
                 Добавить объявление
+              </NavLink>
+              <button
+                data-bs-dismiss="offcanvas"
+                onClick={handleExit}
+                className="btn btn-danger btn-sm"
+              >
+                Выход
               </button>
-              <button className="btn btn-danger btn-sm">Выход</button>
             </div>
           </div>
         </div>

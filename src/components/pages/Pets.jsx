@@ -9,7 +9,7 @@ const Pets = () => {
     dispatch(fetchPets())
   }, [dispatch])
 
-  const pets = useSelector((state) => state.pets.pets)
+  const pets = useSelector((state) => state.pets.pets.reverse())
 
   return (
     <div className="container">
