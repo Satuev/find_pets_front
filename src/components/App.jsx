@@ -1,3 +1,4 @@
+
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import CategoryPets from "./pages/CategoryPets";
@@ -9,6 +10,7 @@ import FormAddPet from "./pages/FormAddPet";
 import ErrorPage from "./pages/errorPage";
 import ContentPets from './pages/HomePage/ContentPets';
 import Footer from './pages/Footer';
+import PetInfo from './pages/PetInfo';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/content" element={<ContentPets />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
+        <Route path="/pet/:id" element={<PetInfo />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer/>

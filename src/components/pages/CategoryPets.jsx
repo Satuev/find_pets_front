@@ -32,9 +32,9 @@ const CategoryPets = () => {
                 <div className="card-body">
                   <h5 className="card-title">{pet.header}</h5>
                   <p className="card-text">{pet.description}</p>
-                  <span href="#" className="btn btn-primary w-100">
+                  <a href={`http://localhost:3000/pet/${pet._id}`} className="btn btn-primary w-100">
                     Перейти куда-нибудь
-                  </span>
+                  </a>
                 </div>
               </div>
             ) : (
