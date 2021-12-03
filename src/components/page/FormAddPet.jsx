@@ -7,6 +7,9 @@ const FormAddPet = () => {
   const [description, setDescription] = useState(null);
   const [category, setCategory] = useState(null);
   const [file, setFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const imageBox = document.querySelector(".imgBox");
 
   const categories = useSelector((state) => state.categories.categories);
 
@@ -20,32 +23,49 @@ const FormAddPet = () => {
     setDescription(e.target.value);
   };
 
-  const handleChangePet = {
-    handleChangeImage: (e) => {
-      setFile(e.target.files[0]);
-    },
+  const handleChangeImage = (e) => {
+    setFile(e.target.files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
 
+    reader.onload = () => {
+      imageBox.src = reader.result;
+    };
+  };
 
-    handleAddPet: () => {
+  const handleAddPet = () => {
+    if (
+      header === null ||
+      description === null ||
+      category === null ||
+      file === null
+    ) {
+      setErrorMessage("*Пожалуйста заполните все поля");
+    } else {
       dispatch(uploadPets(header, description, category, file));
-      // setFile(this.element.reset())
-    },
+    }
+  };
+
+  const handleReset = () => {
+    document.getElementById('myform').reset()
+    setHeader(null)
+    setDescription("")
+    setCategory(null)
+    setErrorMessage(null)
+    imageBox.src = ""
   };
 
   return (
     <div>
       <div className="container">
         <div>
-          <h1 className="text-center">
-            Запишите данные питомца
-          </h1>
+          <h1 className="text-center">Форма объявления</h1>
         </div>
-        <form>
-
-        <div className="row mt-5 container justify-content-center">
-          <div className="col-4">
-            <div className="form-floating">
-              <input
+        <form id="myform">
+          <div className="row mt-5 container justify-content-center">
+            <div className="col-4">
+              <div className="form-floating">
+                <input
                   type="text"
                   className="form-control d-block w-100"
                   id="floatingPassword"
@@ -53,94 +73,116 @@ const FormAddPet = () => {
                   onChange={handleChangeHeader}
                   value={header}
                   name="header"
-              />
+                />
                 <label htmlFor="floatingPassword">Заголовок</label>
-            </div>
-            <div className="form-floating">
-              <textarea
+              </div>
+              <div className="form-floating">
+                <textarea
                   className="form-control d-block mt-5 mb-5 w-100"
                   placeholder="petDesc"
                   id="floatingTextarea"
                   onChange={handleChangeDescription}
                   value={description}
                   name="description"
-              />
-              <label htmlFor="floatingTextarea">Описание питомца</label>
-            </div>
-            <div className="mb-5">
-              <input
-                  className="form-control form-control-sm img-input"
+                />
+                <label htmlFor="floatingTextarea">Описание питомца</label>
+              </div>
+              <div className="mb-5">
+                <input
+                  className="form-control"
                   type="file"
                   id="formFile"
                   accept="image/*"
-                  onChange={handleChangePet.handleChangeImage}
+                  onChange={handleChangeImage}
                   name="img"
-              />
+                />
+              </div>
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  name="category"
+                >
+                  {categories.map((cat) => {
+                    if (cat._id === category) {
+                      return cat.name;
+                    }
+                  })}
+                </button>
+                <ul
+                  className="dropdown-menu text-center"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  {categories.map((category) => (
+                    <li>
+                      <span
+                        type="button"
+                        className="dropdown-item text-start"
+                        onClick={() => setCategory(category._id)}
+                      >
+                        {category.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                name="category"
-              >
-                Категория
-              </button>
-              <ul
-                className="dropdown-menu text-center"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                {categories.map((category) => (
-                  <li>
-                    <span
-                      type="button"
-                      className="dropdown-item"
-                      onClick={() => setCategory(category._id)}
-                    >
-                      {category.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="col-4">
-
-            <img src="" alt=""/>
-
-            <div className="text-end mt-5">
-              <span
-                  disabled={header === null || description === null || category === null || file === null}
-                  className="btn btn-primary"
-                  onClick={handleChangePet.handleAddPet}
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-              >
-                Добавить
-              </span>
+            <div className="col-4">
+              <img width={510} className="imgBox" src="" alt="" />
             </div>
           </div>
-          <div>
-
-          </div>
-        </div>
         </form>
-      </div>
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
-           aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content align-items-center">
-            <div className="modal-header">
-              <h2 className="modal-title text-success" id="exampleModalLabel">Добавленно</h2>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
+        <div className="text-end mt-5 text-center">
+          <div className="text-danger">{errorMessage}</div>
+          <span
+            className="btn btn-primary"
+            onClick={handleAddPet}
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Добавить
+          </span>
         </div>
       </div>
+
+      {header !== null &&
+        description !== null &&
+        category !== null &&
+        file !== null && (
+          <div
+            className="modal fade"
+            id="exampleModal"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content align-items-center">
+                <div className="modal-header">
+                  <h2
+                    className="modal-title text-success"
+                    id="exampleModalLabel"
+                  >
+                    Добавленно
+                  </h2>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    onClick={handleReset}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 };
