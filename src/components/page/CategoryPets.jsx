@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { fetchPets } from '../../redux/features/petsReducer'
 
 const CategoryPets = () => {
-  const pets = useSelector((state) => state.pets.pets)
+  const pets = useSelector((state) => state.pets.pets.reverse())
 
   const dispatch = useDispatch()
 

@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 const Profile = () => {
-
   const dispatch = useDispatch()
 
   const userDate = useSelector(state => state.signIn.userDate)
@@ -75,13 +74,18 @@ const Profile = () => {
               </table>
             </div>
             <div className="div d-flex justify-content-between">
-              <NavLink to={"/pets/add"} className="btn btn-success btn-sm">
+              <NavLink
+                to="/pets/add"
+                className="btn btn-success btn-sm"
+                data-bs-dismiss="offcanvas"
+              >
                 Добавить объявление
               </NavLink>
               <button
-                  data-bs-dismiss="offcanvas"
-                  onClick={handleExit}
-                  className="btn btn-danger btn-sm">
+                data-bs-dismiss="offcanvas"
+                onClick={handleExit}
+                className="btn btn-danger btn-sm"
+              >
                 Выход
               </button>
             </div>
