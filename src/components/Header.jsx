@@ -53,7 +53,7 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          {!token ? (
+          {token ? (
             <NavLink to="/login" className="btn btn-secondary">
               <i className="bi bi-person-fill me-2"></i>
               Войти

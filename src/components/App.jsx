@@ -5,6 +5,7 @@ import HomePage from './page/HomePage'
 import Pets from './page/Pets'
 import SignIn from './page/SignIn'
 import SignUp from './page/SignUp'
+import PetInfo from './page/PetInfo';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/pets/category/:id" element={<CategoryPets />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
+        <Route path="/pet/:id" element={<PetInfo />} />
       </Routes>
     </>
   )

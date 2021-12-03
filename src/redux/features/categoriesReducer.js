@@ -1,5 +1,5 @@
 const initialState = {
-  // users: [],
+  users: [],
   categories: [],
   pending: false
 };
@@ -15,10 +15,10 @@ export const  categoriesReducer = (state = initialState, action) => {
       return {
         ...state, categories: action.payload, pending: false
       }
-      // case "users/load/fulfilled":
-      // return {
-      //   ...state, users: action.payload, pending: false
-      // }
+      case "users/load/fulfilled":
+      return {
+        ...state, users: action.payload, pending: false
+      }
     default:
       return state;
   }
@@ -34,16 +34,16 @@ export const fetchCategories = () => {
         });
   };
 };
-// export const fetchUsers = () => {
-//   return (dispatch) => {
-//     dispatch({type: "load/pending"})
-//     fetch("http://localhost:6557/users")
-//         .then((res) => res.json())
-//         .then((data) => {
-//           dispatch({ type: "users/load/fulfilled", payload: data });
-//         });
-//   };
-// };
+export const fetchUsers = () => {
+  return (dispatch) => {
+    dispatch({type: "load/pending"})
+    fetch("http://localhost:6557/users")
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: "users/load/fulfilled", payload: data });
+        });
+  };
+};
 
 
 
