@@ -9,7 +9,7 @@ const FormAddPet = () => {
   const [file, setFile] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const imageBox = document.querySelector(".imgBox")
+
 
   const categories = useSelector((state) => state.categories.categories)
 
@@ -25,6 +25,7 @@ const FormAddPet = () => {
 
   const handleChangeImage = (e) => {
     setFile(e.target.files[0])
+    const imageBox = document.querySelector(".imgBox")
     const reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
 
@@ -47,6 +48,7 @@ const FormAddPet = () => {
   }
 
   const handleReset = () => {
+    const imageBox = document.querySelector(".imgBox")
     document.getElementById("myform").reset()
     setHeader(null)
     setDescription("")
