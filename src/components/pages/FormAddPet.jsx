@@ -9,8 +9,6 @@ const FormAddPet = () => {
   const [file, setFile] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const imageBox = document.querySelector(".imgBox")
-
   const categories = useSelector((state) => state.categories.categories)
 
   const dispatch = useDispatch()
@@ -25,6 +23,7 @@ const FormAddPet = () => {
 
   const handleChangeImage = (e) => {
     setFile(e.target.files[0])
+    const imageBox = document.querySelector(".imgBox")
     const reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
 
@@ -47,6 +46,7 @@ const FormAddPet = () => {
   }
 
   const handleReset = () => {
+    const imageBox = document.querySelector(".imgBox")
     document.getElementById("myform").reset()
     setHeader(null)
     setDescription("")
@@ -97,15 +97,17 @@ const FormAddPet = () => {
                   name="img"
                 />
               </div>
+
               <div className="dropdown">
                 <button
-                  className="btn btn-secondary dropdown-toggle"
+                  className="btn btn-outline-secondary dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   name="category"
                 >
+                  {`Категория:  `}
                   {categories.map((cat) => {
                     if (cat._id === category) {
                       return cat.name
@@ -167,7 +169,7 @@ const FormAddPet = () => {
                     className="modal-title text-success"
                     id="exampleModalLabel"
                   >
-                    Добавленно
+                    Добавлено
                   </h2>
                 </div>
                 <div className="modal-footer">

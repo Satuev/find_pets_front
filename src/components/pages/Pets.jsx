@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchPets } from '../../redux/features/petsReducer'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { fetchPets } from "../../redux/features/petsReducer"
 
 const Pets = () => {
   const dispatch = useDispatch()
@@ -12,24 +13,30 @@ const Pets = () => {
   const pets = useSelector((state) => state.pets.pets.reverse())
 
   return (
-    <div className="container">
-      <div className="row justify-content-between">
+    <div className="container mt-4">
+      <div className="row row-cols-lg-3  row-cols-md-2 row-cols-sm-1 row-cols-1 g-4">
         {pets.map((pet) => (
-          <div
-            className="card col-lg-3 col-md-5 col-sm-12  m-2 border-0 shadow"
-            key={pet._id}
-          >
-            <img
-              src={`http://localhost:6557/${pet.img}`}
-              className="card-img-top mt-1 rounded  shadow"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">{pet.header}</h5>
-              <p className="card-text">{pet.description}</p>
-              <a href={`http://localhost:3000/pet/${pet._id}`} className="btn btn-primary w-100">
-                Описание
-              </a>
+          <div className="col" key={pet._id}>
+            <div className="card h-100  border-0 shadow">
+              <img
+                src={`http://localhost:6557/${pet.img}`}
+                className="card-img-top  rounded   h-50"
+                alt="..."
+              />
+              <div className="card-body">
+                <h5 className="card-title ">{pet.header}</h5>
+                <hr />
+                <p className="card-text  h-25">
+                  {pet.description.substring(0, 65)} . . .
+                </p>
+                <hr />
+                <Link
+                  to={`/pet/${pet._id}`}
+                  className="btn btn-primary w-100 fs-4 mt-4 "
+                >
+                  Описание
+                </Link>
+              </div>
             </div>
           </div>
         ))}
