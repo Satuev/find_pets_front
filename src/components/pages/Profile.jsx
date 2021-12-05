@@ -12,11 +12,7 @@ const Profile = () => {
 
   useEffect(()=>{
     dispatch(uploadUserDate())
-  }, [token])
-
-
-
-
+  }, [dispatch, token])
   
   const handleExit = () => {
     dispatch(exitInAccount())
@@ -86,6 +82,13 @@ const Profile = () => {
                 data-bs-dismiss="offcanvas"
               >
                 Добавить объявление
+              </NavLink>
+              <NavLink
+                  to="/myPets/"
+                  className="btn btn-success btn-sm"
+                  data-bs-dismiss="offcanvas"
+              >
+                Мои объявления
               </NavLink>
               <button
                 data-bs-dismiss="offcanvas"

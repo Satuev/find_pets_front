@@ -6,8 +6,12 @@ import img from "./pes.png"
 import img2 from "./koshki.png"
 import ContentPets from "./ContentPets"
 import cl from "./homePage.module.css"
+import {useSelector} from "react-redux";
 
 const HomePage = () => {
+
+  const pets = useSelector((state) => state.pets.pets.reverse())
+
   return (
     <div className="">
       <div
@@ -51,7 +55,7 @@ const HomePage = () => {
           <span className="visually-hidden">Следующий</span>
         </button>
       </div>
-      <ContentPets />
+      <ContentPets pets={pets}/>
       <div className="container">
         <div className={`d-flex justify-content-between ${cl.stick}`}>
           <div className="d-flex col-6 g-0 h-100 border rounded me-2 ">

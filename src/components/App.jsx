@@ -10,6 +10,7 @@ import ErrorPage from "./pages/errorPage"
 import ContentPets from "./pages/HomePage/ContentPets"
 import Footer from "./pages/Footer"
 import PetInfo from "./pages/PetInfo"
+import MyPets from "./pages/myPets";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<SignIn />} />
         <Route path="/registry" element={<SignUp />} />
         <Route path="/pet/:id" element={<PetInfo />} />
+        <Route path="/myPets/" element={<MyPets />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

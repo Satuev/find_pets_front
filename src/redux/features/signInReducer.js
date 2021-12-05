@@ -19,6 +19,7 @@ export const signInReducer = (state = initialState, action) => {
         token: action.payload,
         error: null,
         signingIn: false,
+        userDate: {}
       }
     case 'signInReducer/signIn/rejected':
       return {
@@ -56,7 +57,7 @@ export const auth = (userDate) => {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         if (data.error) {
           dispatch({ type: 'signInReducer/signIn/rejected', error: data.error })
         } else {
@@ -73,7 +74,7 @@ export const uploadUserDate = () => {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${initialState.token}`,
       },
     })
       .then((res) => res.json())

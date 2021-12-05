@@ -2,10 +2,12 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { Link } from "react-router-dom"
-import { fetchPets } from "../../redux/features/petsReducer"
+import {fetchPets, removeCardPet} from "../../redux/features/petsReducer"
 
 const CategoryPets = () => {
   const pets = useSelector((state) => state.pets.pets.reverse())
+
+  const user = useSelector(state => state.signIn.userDate)
 
   const dispatch = useDispatch()
 
@@ -14,6 +16,10 @@ const CategoryPets = () => {
   }, [dispatch])
 
   const { id } = useParams()
+
+  const handleRemoveCard = (id) => {
+    dispatch(removeCardPet(id))
+  }
 
   return (
     <div>
@@ -35,12 +41,26 @@ const CategoryPets = () => {
                       {pet.description.substring(0, 65)} . . .
                     </p>
                     <hr />
-                    <Link
-                      to={`/pet/${pet._id}`}
-                      className="btn btn-primary w-100 fs-4 mt-3"
-                    >
-                      Описание
-                    </Link>
+                    {pet.user === user._id? <div className="d-flex justify-content-around">
+                          <Link
+                              to={`/pet/${pet._id}`}
+                              className="btn btn-primary w-40 fs-4 mt-4 "
+                          >
+                            Описание
+                          </Link>
+                          <span
+                              className="btn btn-danger w-40 fs-4 mt-4"
+                              onClick={()=>handleRemoveCard(pet._id)}
+                          >
+                            Удалить
+                          </span>
+                        </div>:
+                        <Link
+                            to={`/pet/${pet._id}`}
+                            className="btn btn-primary w-100 fs-4 mt-4 "
+                        >
+                          Описание
+                        </Link>}
                   </div>
                 </div>
               </div>

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { fetchContentPets } from "../../../../redux/features/petsReducer"
 import cl from "./contentPets.module.css"
 
-const ContentPets = () => {
-  const pets = useSelector((state) => state.pets.pets.reverse())
+const ContentPets = ({pets}) => {
+
   const dispatch = useDispatch()
 
   useEffect(() => {

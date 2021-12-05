@@ -30,7 +30,11 @@ export const petsReducer = (state = initialState, action) => {
         pets: action.payload,
         pending: false
       }
-
+    case "pets/remove/fulfilled":
+      return {
+        ...state,
+        pets: state.pets.filter((pet) => pet._id !== action.payload)
+      }
     default:
       return state;
   }
@@ -77,5 +81,18 @@ export const fetchContentPets = () => {
     .then(data => {
       dispatch({type: 'content/pets/fulfilled', payload:data})
     })
+  }
+}
+
+export const removeCardPet = (id) =>{
+  return(dispatch) => {
+    fetch(`http://localhost:6557/pets/remove/${id}`, {
+      method: "DELETE"
+    })
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({type: "pets/remove/fulfilled", payload: id})
+        })
+
   }
 }
