@@ -23,32 +23,7 @@ const Header = () => {
             <img className="logo w-25" src={logo} alt="logo" />
             <h5>В добрые руки</h5>
           </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Переключатель навигации"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse " id="navbarNav">
-          <ul className="navbar-nav m-auto pe-5">
-            <li className="nav-item">
-              <NavLink git to="/pets" className="nav-link" type="button">
-                Все питомцы
-              </NavLink>
-            </li>
-            {categories.map((category) => (
-              <li className="nav-item" key={category._id}>
-                <NavLink
-                  to={`/pets/category/${category._id}`}
-                  className="nav-link"
-                  type="button"
-                >
-                  {category.name}
+
 
           <button
             className="navbar-toggler"

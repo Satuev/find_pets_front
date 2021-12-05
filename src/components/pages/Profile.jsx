@@ -14,6 +14,10 @@ const Profile = () => {
     dispatch(uploadUserDate())
   }, [token])
 
+
+
+
+  
   const handleExit = () => {
     dispatch(exitInAccount())
   }
