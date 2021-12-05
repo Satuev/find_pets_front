@@ -17,7 +17,7 @@ const Profile = () => {
   const handleExit = () => {
     dispatch(exitInAccount())
   }
-//asdad
+//asdadasd
   return (
     <div
       className="offcanvas offcanvas-end"
